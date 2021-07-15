@@ -41,3 +41,29 @@ export const moveAllTask = (cardArray, currentCardId, targetCardId) => {
     return cardArray;
   }
 };
+
+export const updateTask = (
+  cardArray,
+  currentCardId,
+  targetCardId,
+  taskId,
+  taskData
+) => {
+  const currentCard = cardArray.find((card) => card.id === currentCardId);
+  const item = currentCard.tasks.find((task) => task.id === taskId);
+  if (currentCardId === targetCardId) {
+    debugger;
+    cardArray.map((card) => {
+      if (card.id === currentCardId) {
+        return {
+          ...card,
+          tasks: card.tasks.map((task) =>
+            task.id === taskId ? { ...taskData } : task
+          ),
+        };
+      } else {
+        return card;
+      }
+    });
+  }
+};

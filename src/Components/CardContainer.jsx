@@ -19,6 +19,7 @@ import { CardContext } from "../services/Contexts/cardContext";
 import { DELETE_TASK } from "../services/constant";
 import sweetAlert from "sweetalert";
 import StatusComp from "./StatusComp";
+import UpdateModal from "./UpdateModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +85,8 @@ const CardContainer = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [statusModalToggle, setStatusModalToggle] = useState(false);
+  const [updateModalToggle, setUpdateModalToggle] = useState(false);
+  const [currentTask, setCurrentTask] = useState("");
   const [assignName, setAssignName] = useState([]);
   const { dispatch } = useContext(CardContext);
 
@@ -152,7 +155,13 @@ const CardContainer = (props) => {
                 color="secondary"
                 onClick={() => handleTaskDelete(task.id)}
               />
-              <EditIcon color="primary" />
+              <EditIcon
+                color="primary"
+                onClick={() => {
+                  setUpdateModalToggle(true);
+                  setCurrentTask(task.id);
+                }}
+              />
             </span>
           </Card>
         ))}
@@ -171,6 +180,15 @@ const CardContainer = (props) => {
           toggle={statusModalToggle}
           closeStatusModal={() => setStatusModalToggle(false)}
           cardId={card.id}
+        />
+      )}
+      {updateModalToggle && (
+        <UpdateModal
+          assignName={assignName}
+          cardId={card.id}
+          openUpdateModal={updateModalToggle}
+          onCloseUpdateModal={() => setUpdateModalToggle(false)}
+          taskId={currentTask}
         />
       )}
     </Box>

@@ -3,6 +3,7 @@ import {
   moveAllTask,
   sortByName,
   sortByRandom,
+  updateTask,
 } from "../../utility";
 import {
   ADD_CARD,
@@ -12,6 +13,7 @@ import {
   MOVE_ALL_TASKS,
   SORT_BY_NAME,
   SORT_RANDOM,
+  UPDATE_TASK,
 } from "../constant";
 
 export const cardReducer = (cardArray, { type, payload }) => {
@@ -63,6 +65,14 @@ export const cardReducer = (cardArray, { type, payload }) => {
         cardArray,
         payload.currentCardId,
         payload.targetCardId
+      );
+    case UPDATE_TASK:
+      return updateTask(
+        cardArray,
+        payload.currentCardId,
+        payload.targetCardId,
+        payload.taskId,
+        payload.taskData
       );
 
     default:
