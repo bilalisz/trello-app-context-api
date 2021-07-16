@@ -49,21 +49,40 @@ export const updateTask = (
   taskId,
   taskData
 ) => {
-  const currentCard = cardArray.find((card) => card.id === currentCardId);
-  const item = currentCard.tasks.find((task) => task.id === taskId);
   if (currentCardId === targetCardId) {
     debugger;
-    cardArray.map((card) => {
+    return [
+      ...cardArray.map((card) => {
+        if (card.id === currentCardId) {
+          return {
+            ...card,
+            tasks: card.tasks.map((task) =>
+              task.id === taskId ? { ...taskData } : task
+            ),
+          };
+        } else {
+          return card;
+        }
+      }),
+    ];
+  } else if (currentCardId !== targetCardId) {
+    let currentCard = cardArray.map((card) => {
       if (card.id === currentCardId) {
         return {
           ...card,
-          tasks: card.tasks.map((task) =>
-            task.id === taskId ? { ...taskData } : task
-          ),
+          tasks: [...card.tasks.filter((task) => task.id !== taskId)],
         };
+      } else {
+        return card;
+      }
+    });
+    return currentCard.map((card) => {
+      if (card.id === targetCardId) {
+        return { ...card, tasks: [...card.tasks, taskData] };
       } else {
         return card;
       }
     });
   }
 };
+// let item = currentCard.tasks.find((task) => task.id === taskId);
