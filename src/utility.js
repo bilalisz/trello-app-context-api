@@ -21,7 +21,7 @@ export const deleteTask = (cardArray, cardId, taskId) => {
 
 export const moveAllTask = (cardArray, currentCardId, targetCardId) => {
   if (currentCardId !== targetCardId) {
-    debugger;
+   
     const currentCnt = cardArray.find((card) => card.id === currentCardId);
     const currentTasks = currentCnt.tasks;
 
@@ -35,7 +35,7 @@ export const moveAllTask = (cardArray, currentCardId, targetCardId) => {
         : card
     );
 
-    debugger;
+   
     return updatedArray;
   } else {
     return cardArray;
@@ -50,7 +50,7 @@ export const updateTask = (
   taskData
 ) => {
   if (currentCardId === targetCardId) {
-    debugger;
+   
     return [
       ...cardArray.map((card) => {
         if (card.id === currentCardId) {
