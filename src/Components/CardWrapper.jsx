@@ -9,12 +9,14 @@ const useStyle = makeStyles({
   root: {
     display: "flex",
     justifyContent: "space-between",
+    
   },
   cardWrapper: {
     margin: "10px",
     backgroundColor: "#DFDFE0",
     boxShadow: "0px 0px 1px 1px #fff",
     padding: "4px",
+    height:"100%"
   },
 });
 
